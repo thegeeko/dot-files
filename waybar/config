@@ -1,0 +1,82 @@
+{
+    "layer": "top",
+    "height": 25,
+    "modules-left": ["custom/geny", "sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["cpu","temperature", "idle_inhibitor", "network" ],
+
+    "custom/geny" : {
+       "format": "Geny"
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": " 1  ",
+            "2": " 2  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": " 8  ",
+            "9": " 9  ",
+            "10": " 10 "
+        }
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 0
+    },
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+ 	    //"format-icons": ["🌑","🌒","🌓","🌔","🌕"]
+        "format-icons": ["", ""]
+    },
+
+    "network": {
+        "interval": 1,
+    	"format": "{bandwidthDownBits} ⇵ {bandwidthUpBits}",
+        "format-alt": "{essid} : {signalStrength} ",
+        "format-disconnected": "Disconnected ⚠",
+        "onclick": "exec alacritty -e nmtui"
+    },
+
+    "temperature": {
+        "interval": 1,
+        "thermal-zone": 1,
+  	    "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+  	    "critical-threshold": 80,
+  	    "format-critical": "{temperatureC}°C ",
+  	    "format": "{temperatureC}°C "
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": "{usage}% ",
+        "max-length": 10
+    }
+
+}
