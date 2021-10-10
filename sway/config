@@ -20,7 +20,7 @@ set $lock 'grim /tmp/screen.png; corrupter /tmp/screen.png /tmp/screengl.png; sw
 
 output * adaptive_sync on
 output DP-1 mode 1920x1080@144Hz
-output * bg /home/thegeeko/pictures/wallpapers/ainme-gruvbox.png fill
+output * bg /home/thegeeko/pictures/wallpapers/wallpaper fill
 
 exec swayidle timeout 510 'brightnessctl -s && brightnessctl set 5%' resume 'brightnessctl -r' timeout 510 'notify-send "Locking screen in 30 seconds..."' timeout 540 'grim /tmp/screen.png; corrupter /tmp/screen.png /tmp/screen.png; swaylock -fi /tmp/screen.png --effect-vignette 0.5:0.5 --clock --indicator-radius 100 --indicator-thickness 7  --ring-color ebdbb2 --key-hl-color 282828 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --grace 2 --fade-in 0.2' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 900 'systemctl suspend'
 exec swayidle before-sleep $lock
