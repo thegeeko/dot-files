@@ -22,7 +22,7 @@ alacrittyc="$HOME/.config/alacritty"
 xinitrc="$HOME/.xinitrc"
 
 function deploy () {
-	conf=$(basename $1)
+	conf="$PWD/$(basename $1)"
 	if [ ! -d $conf ] && [ ! -f $conf ]; then 
 		echo "WARNNING : no $conf config"
 		return
@@ -43,4 +43,5 @@ deploy "$fishc"
 deploy "$dunstc"
 deploy "$alacrittyc"
 deploy "$xinitrc"
+
 
