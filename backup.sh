@@ -34,5 +34,3 @@ backup "$fishc"
 backup "$dunstc"
 backup "$alacrittyc"
 backup "$xinitrc"
-
-git add *
