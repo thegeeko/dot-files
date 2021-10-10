@@ -5,6 +5,11 @@ if [ ! -d .git ]; then
 	exit
 fi;
 
+if [ ! -d $HOME/.config ]; then
+	echo "no .config folder \n creating one ..."
+	mkdir $HOME/.config
+fi
+
 nvimc="$HOME/.config/nvim"
 swayc="$HOME/.config/sway"
 waybarc="$HOME/.config/waybar"
