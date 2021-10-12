@@ -27,28 +27,28 @@ exec swayidle before-sleep $lock
 
 for_window [title="Geg"] floating enable
 for_window [title="Dear ImGui Demo"] floating enable
-for_window [app_id="termfloat"] floating enable
-for_window [app_id="termfloat"] resize set height 500
+for_window [app_id="termfloat"] { 
+	floating enable
+	resize set height 500
+}
 
 bindsym $mod+Return exec $term
 bindsym $mod+w kill
 bindsym Alt+Space exec $menu
 bindsym $mod+escape exec 'grim /tmp/screen.png; corrupter /tmp/screen.png /tmp/screengl.png; swaylock -fi /tmp/screengl.png --effect-vignette 0.5:0.5 --clock --indicator-radius 100 --indicator-thickness 7  --ring-color ebdbb2 --key-hl-color 282828 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --fade-in 0.2'
 bindsym $mod+Home exec pkill waybar && waybar
-bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 2+
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 2-
-bindsym XF86AudioMicMute exec pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle
+bindsym XF86AudioMute exec pamixer -t
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl play-pause -p spotify
-bindsym $mod+g exec google-chrome-stable
+bindsym $mod+g exec firefox
+bindsym $mod+f exec $term -e ranger
 bindsym $mod+p exec /home/thegeeko/.config/sway/scripts/wofipass
 bindsym Print exec /home/thegeeko/.config/sway/scripts/grimshot copy area
-
 bindsym $mod+Shift+Return exec $term --class="termfloat"
-floating_modifier $mod normal
 
 
 # Reload the configuration file
@@ -107,7 +107,7 @@ bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
 # Make the current focus fullscreen
-bindsym $mod+f fullscreen
+bindsym $mod+Shift+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -141,6 +141,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+floating_modifier $mod normal
 
 default_floating_border pixel 5
 default_border pixel 2

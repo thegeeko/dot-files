@@ -10,6 +10,8 @@ vim.cmd [[
 	nnoremap <C-P> "+P
 	vnoremap <C-p> "+p
 	vnoremap <C-P> "+P
+
+	nnoremap <F5><F5> :source ~/.config/nvim/init.lua<cr>
 ]]
 -- allow split
 vim.cmd[[
@@ -55,13 +57,14 @@ vim.cmd[[
 	set autoindent
 	set smartindent
 	set nu rnu
+
+	noremap <F12><F12> :%s/  /	/g<cr>
 ]]
 
 require("indent_blankline").setup {
 	show_end_of_line = true,
 	char = ".",
 	buftype_exclude = {"terminal"},
-
 }
 
 ------ some tools config
@@ -220,8 +223,7 @@ vim.cmd [[
 	let g:nvim_tree_indent_markers = 1
 	let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 }
 	nnoremap tt :NvimTreeToggle<CR>
-	nnoremap ttr :NvimTreeRefresh<CR>
-	nnoremap ttn :NvimTreeFindFile<CR>
+	nnoremap tr :NvimTreeRefresh<CR>
 	set termguicolors	
 	highlight NvimTreeFolderIcon guibg=blue
 ]]

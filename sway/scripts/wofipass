@@ -31,7 +31,7 @@ echo $option
 
 case ${option} in
 	Password )
-		ydotool type $(pass ${SECRET})
+		pass ${SECRET} -c
 		;;
 	"QR-Code" )
 		if [[ $SECRET =~ wifi$ ]]; then
