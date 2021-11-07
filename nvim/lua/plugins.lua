@@ -1,4 +1,4 @@
--- install packer if it's not 
+-- install packer if it's not
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -17,20 +17,20 @@ return require('packer').startup({function()
 	use{
 		'hrsh7th/nvim-cmp',
 		requires={
-			{ 'hrsh7th/cmp-nvim-lsp' },
-			{ 'hrsh7th/cmp-buffer' },
-			{ 'hrsh7th/cmp-path' },
-			{ 'hrsh7th/cmp-nvim-lua' },
-			{ 'ray-x/cmp-treesitter' },
-			{ 'f3fora/cmp-spell' },
-			{ 'L3MON4D3/LuaSnip' },
-			{ 'saadparwaiz1/cmp_luasnip' },
-			{ 'neovim/nvim-lspconfig' },
+			 'hrsh7th/cmp-nvim-lsp',
+			 'hrsh7th/cmp-buffer',
+			 'hrsh7th/cmp-path',
+			 'hrsh7th/cmp-nvim-lua',
+			 'ray-x/cmp-treesitter',
+			 'f3fora/cmp-spell',
+			 'L3MON4D3/LuaSnip',
+			 'saadparwaiz1/cmp_luasnip',
+			 'neovim/nvim-lspconfig',
 		}
 	}
 	use{
 		'glepnir/lspsaga.nvim',
-		requires = {{ 'neovim/nvim-lspconfig' }}
+		requires = {'neovim/nvim-lspconfig'}
 	}
 	use {
 		'nvim-treesitter/nvim-treesitter',
@@ -42,17 +42,23 @@ return require('packer').startup({function()
 	use 'terrortylor/nvim-comment'
 	use {
 		'lewis6991/gitsigns.nvim',
-		requires = {{ 'nvim-lua/plenary.nvim' }}
+		requires = {'nvim-lua/plenary.nvim'}
 	}
 	use {
 		'nvim-telescope/telescope.nvim',
-		requires = {{ 'nvim-lua/plenary.nvim' }, {'nvim-telescope/telescope-fzy-native.nvim'}}
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope-fzy-native.nvim'
+		}
 	}
 	use {
 		'kyazdani42/nvim-tree.lua',
-		requires = {{ 'kyazdani42/nvim-web-devicons' }},
+		requires = {'kyazdani42/nvim-web-devicons'},
 	}
-
+	use {
+		'goolord/alpha-nvim',
+		requires = {'kyazdani42/nvim-web-devicons'},
+	}
 end,
 config = {
 	display = {

@@ -19,7 +19,8 @@ set MANGOHUD 1
 set _JAVA_AWT_WM_NONREPARENTING 1
 set XDG_CURRENT_DESKTOP sway
 set XDG_SESSION_TYPE wayland
-
+set QT_QPA_PLATFORM wayland
+set QT_QPA_PLATFORMTHEME qt5ct
 ### SET MANPAGER
 ### Uncomment only one of these!
 

@@ -1,18 +1,18 @@
+require("./helpers/maping.lua")
+
 ------ basic config
 -- copy and paste to system
-vim.cmd [[
-	vnoremap <C-y> "+y
-	nnoremap <C-Y> "+yg_
-	nnoremap <C-y> "+y
-	nnoremap <C-yy> "+yy
-	
-	nnoremap <C-p> "+p
-	nnoremap <C-P> "+P
-	vnoremap <C-p> "+p
-	vnoremap <C-P> "+P
+	vnoremap({'<C-y>', '"+y'})
+	nnoremap({'<C-Y>', '"+yg_'})
+	nnoremap({'<C-y>', '"+y'})
+	nnoremap({'<C-yy>', '"+yy'})
+	nnoremap({'<C-p>', '"+p'})
+	nnoremap({'<C-P>', '"+P'})
+	vnoremap({'<C-p>', '"+p'})
+	vnoremap({'<C-P>', '"+P'})
 
-	nnoremap <F5><F5> :source ~/.config/nvim/init.lua<cr>
-]]
+	nnoremap({'<F5><F5>', ':source ~/.config/nvim/init.lua<cr>'})
+
 -- allow split
 vim.cmd[[
 	set splitbelow
@@ -27,6 +27,43 @@ vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.gruvbox_flat_style = "hard"
 
 vim.cmd[[ colorscheme gruvbox-flat ]]
+
+------ splash screen
+local alpha = require("alpha")
+local dashboard = require("alpha.themes.dashboard")
+
+-- Set header
+dashboard.section.header.val = {
+    "                                                     ",
+    "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+    "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+    "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+    "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+    "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+    "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+    "                                                     ",
+}
+
+-- Set menu
+dashboard.section.buttons.val = {
+    dashboard.button( "e", "  > New file" , ":ene <BAR> startinsert <CR>"),
+    dashboard.button( "f", "  > Find file", ":cd $HOME/projects | Telescope find_files<CR>"),
+    dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>"),
+    dashboard.button( "s", "  > Congig" , ":e $HOME/.config/nvim/init.lua"),
+    dashboard.button( "q", "  > Quit NVIM", ":qa<CR>"),
+}
+
+-- Set footer
+local fortune = require("alpha.fortune")
+dashboard.section.footer.val = fortune()
+
+-- Send config to alpha
+alpha.setup(dashboard.opts)
+
+-- Disable folding on alpha buffer
+vim.cmd([[
+    autocmd FileType alpha setlocal nofoldenable
+]])
 
 ------ comments
 require('nvim_comment').setup(
@@ -49,7 +86,7 @@ require('nvim_comment').setup(
 ------ indentation and lines nu
 vim.opt.list = true
 vim.cmd[[ 
-	set listchars=tab:‣\ ,trail:·,precedes:«,extends:»,eol:¬,space:., 
+	set listchars=tab:-\ ,trail:·,precedes:«,extends:»,eol:¬,space:., 
 	set softtabstop=2
 	set tabstop=2
 	set shiftwidth=2
@@ -58,8 +95,9 @@ vim.cmd[[
 	set smartindent
 	set nu rnu
 
-	noremap <F12><F12> :%s/  /	/g<cr>
 ]]
+
+	nnoremap({'<F12><F12>', ' :%s/  /	/g<cr>'})
 
 require("indent_blankline").setup {
 	show_end_of_line = true,
@@ -70,22 +108,18 @@ require("indent_blankline").setup {
 ------ some tools config
 -- Telescope
 require('telescope').load_extension('fzy_native')
-vim.cmd[[
-	nnoremap <Space>f <cmd>lua require('telescope.builtin').find_files()<cr>
-	nnoremap <Space>g <cmd>lua require('telescope.builtin').live_grep()<cr>
-	nnoremap <Space><Space> <cmd>lua require('telescope.builtin').buffers()<cr>
-	nnoremap <Space>h <cmd>lua require('telescope.builtin').commands()<cr>
-	nnoremap <Space>h <cmd>lua require('telescope.builtin').help_tags()<cr>
-	nnoremap <Space>m <cmd>lua require('telescope.builtin').man_pages()<cr>
-	nnoremap <Space>= <cmd>lua require('telescope.builtin').git_bcommits()<cr>
-	nnoremap <Space>+ <cmd>lua require('telescope.builtin').git_commits()<cr>
-]]
+nnoremap({'<Space>f', '<cmd>lua require("telescope.builtin").find_files()<cr>'})
+nnoremap ({'<Space>g', '<cmd>lua require("telescope.builtin").live_grep()<cr>'})
+nnoremap ({'<Space><Space>', '<cmd>lua require("telescope.builtin").buffers()<cr>'})
+nnoremap ({'<Space>h <cmd>lua', 'require("telescope.builtin").commands()<cr>'})
+nnoremap ({'<Space>h <cmd>lua', 'require("telescope.builtin").help_tags()<cr>'})
+nnoremap ({'<Space>m <cmd>lua', 'require("telescope.builtin").man_pages()<cr>'})
+nnoremap ({'<Space>= <cmd>lua', 'require("telescope.builtin").git_bcommits()<cr>'})
+nnoremap ({'<Space>+ <cmd>lua', 'require("telescope.builtin").git_commits()<cr>'})
 -- cmake
-vim.cmd[[
-	nnoremap cg <cmd>CMakeGenerate<cr>
-	nnoremap cb <cmd>CMakeBuild<cr>
-	nnoremap cc <cmd>CMakeClean<cr>
-]]
+nnoremap({'cg', '<cmd>CMakeGenerate<cr>'})
+nnoremap({'cb', '<cmd>CMakeBuild<cr>'})
+nnoremap({'cc', '<cmd>CMakeClean<cr>'})
 
 ------ git signs
 require('gitsigns').setup {
@@ -218,12 +252,14 @@ require('nvim-tree').setup {
 	}
 }
 
+vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_special_files = { 'README.md', 'Makefile', 'MAKEFILE' }
+
+nnoremap({'tt', ':NvimTreeToggle<CR>'})
+nnoremap({'tr', ':NvimTreeRefresh<CR>'})
+
 vim.cmd [[
-	let g:nvim_tree_highlight_opened_files = 1
-	let g:nvim_tree_indent_markers = 1
-	let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 }
-	nnoremap tt :NvimTreeToggle<CR>
-	nnoremap tr :NvimTreeRefresh<CR>
 	set termguicolors	
 	highlight NvimTreeFolderIcon guibg=blue
 ]]
