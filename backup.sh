@@ -13,6 +13,7 @@ qtilec="$HOME/.config/qtile"
 fishc="$HOME/.config/fish"
 dunstc="$HOME/.config/dunst"
 alacrittyc="$HOME/.config/alacritty"
+newsboatc="$HOME/.newsboat"
 
 xinitrc="$HOME/.xinitrc"
 
@@ -33,4 +34,5 @@ backup "$qtilec" "__pycache__"
 backup "$fishc"
 backup "$dunstc"
 backup "$alacrittyc"
+backup "$newsboatc" "cache.db history.cmdline"
 backup "$xinitrc"

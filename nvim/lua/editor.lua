@@ -1,5 +1,3 @@
-require("./helpers/maping.lua")
-
 ------ basic config
 -- copy and paste to system
 	vnoremap({'<C-y>', '"+y'})

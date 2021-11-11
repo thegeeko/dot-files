@@ -18,6 +18,7 @@ qtilec="$HOME/.config/qtile"
 fishc="$HOME/.config/fish"
 dunstc="$HOME/.config/dunst"
 alacrittyc="$HOME/.config/alacritty"
+newsboatc="$HOME/.newsboat"
 
 xinitrc="$HOME/.xinitrc"
 
@@ -42,6 +43,7 @@ deploy "$qtilec"
 deploy "$fishc"
 deploy "$dunstc"
 deploy "$alacrittyc"
+deploy "$newsboatc"
 deploy "$xinitrc"
 
 
