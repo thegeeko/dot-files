@@ -20,11 +20,11 @@ vim.cmd[[
 	set nostartofline
 ]]
 -- colorscheme
-vim.g.gruvbox_italic_functions = true
-vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-vim.g.gruvbox_flat_style = "hard"
+vim.g.tokyonight_style = "night"
+-- vim.g.tokyonight_italic_functions = true
+vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 
-vim.cmd[[ colorscheme gruvbox-flat ]]
+vim.cmd[[colorscheme tokyonight]]
 
 ------ splash screen
 local alpha = require("alpha")
@@ -64,8 +64,7 @@ vim.cmd([[
 ]])
 
 ------ comments
-require('nvim_comment').setup(
-	{
+require('nvim_comment').setup({
 		-- Linters prefer comment and line to have a space in between markers
 		marker_padding = true,
 		-- should comment out empty or whitespace only lines
@@ -78,8 +77,7 @@ require('nvim_comment').setup(
 		operator_mapping = "\\",
 		-- Hook function to call before commenting takes place
 		hook = nil
-	}
-)
+})
 
 ------ indentation and lines nu
 vim.opt.list = true
@@ -266,7 +264,7 @@ vim.cmd [[
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = 'gruvbox-flat',
+		theme = 'tokyonight',
 		component_separators = {'/', '/'},
 		section_separators = {' ', ' '},
 		disabled_filetypes = {}

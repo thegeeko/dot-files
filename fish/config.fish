@@ -21,6 +21,7 @@ set XDG_CURRENT_DESKTOP sway
 set XDG_SESSION_TYPE wayland
 set QT_QPA_PLATFORM wayland
 set QT_QPA_PLATFORMTHEME qt5ct
+set GLIBC_TUNABLES glibc.rtld.dynamic_sort=2
 ### SET MANPAGER
 ### Uncomment only one of these!
 
@@ -43,16 +44,16 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 ## color theme
 
 # Dracula Color Palette
-set -l foreground f8f8f2
-set -l selection 44475a
-set -l comment 6272a4
-set -l red ff5555
-set -l orange ffb86c
-set -l yellow f1fa8c
-set -l green 50fa7b
-set -l purple bd93f9
-set -l cyan 8be9fd
-set -l pink ff79c6
+set -l foreground c0caf5
+set -l selection 33467C
+set -l comment 565f89
+set -l red f7768e
+set -l orange ff9e64
+set -l yellow e0af68
+set -l green 9ece6a
+set -l purple 9d7cd8
+set -l cyan 7dcfff
+set -l pink bb9af7
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -75,7 +76,6 @@ set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
-
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal brcyan

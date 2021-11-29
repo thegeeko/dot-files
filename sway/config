@@ -146,7 +146,7 @@ floating_modifier $mod normal
 default_floating_border pixel 5
 default_border pixel 2
 
-smart_gaps on
+smart_gaps off
 gaps inner 5
 gaps outer 5
 gaps bottom 5
@@ -160,7 +160,7 @@ exec systemctl --user import-environment WAYLAND_DISPLAY &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 
-client.focused #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2 #ebdbb2
+client.focused #bb9af7 #bb9af7 #bb9af7 #bb9af7 #bb9af7
 client.unfocused #453a3a #453a3a #453a3a #453a3a #453a3a
 client.focused_inactive #453a3a #453a3a #453a3a #453a3a #453a3a
 

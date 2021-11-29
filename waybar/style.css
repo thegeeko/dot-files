@@ -1,78 +1,69 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: mononokiNerdFont;
-    font-size: 14px;
-    min-height: 0;
-    margin: 0 0px;
+	border: none;
+	border-radius: 0;
+	font-family: mononokiNerdFont;
+	font-size: 14px;
+	min-height: 0;
+	margin: 0 0px;
 }
 
 window#waybar {
-    background-color: rgba(1, 1, 1, 0);
-    border-bottom: none;
-    color: #ebdbb2;
-    transition-property: background-color;
-    transition-duration: .5s;
+	background-color: rgba(26, 27, 38, 0.3);
+	border-bottom: none;
+	color: #cfc9c2;
+	transition-property: background-color;
+	transition-duration: .5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 #custom-geny {
-    background-color: #D3869B;
-    padding-left: 10px;
-    padding-right: 7px;
-    color: #1D2021;
-    margin: 3px 10px 3px 0px;
-    border-radius: 0 3px 3px 0;
+	background-color: #f7768e;
+	padding-left: 10px;
+	padding-right: 7px;
+	color: #1a1b26;
+	margin: 3px 5px;
+	border-radius: 3px;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 #workspaces {
-    margin-right: 6px;
+	margin-right: 6px;
+	background-color: #24283b;
+	border-radius: 3px;
+	margin: 3px 10px;
 }
 
 #workspaces button {
-    margin: 4px 2px;
-    padding: 0 5px;
-    color: #ebdbb2;
-    border-radius: 3px;
-    /* background-color: transparent;
-    border-bottom: 3px solid transparent;
-    */
+	margin: 0 3px;
+	padding: 0 5px;
+	color: #cfc9c2;
+	border-radius: 3px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inherit;
-    border-bottom: none;
-    border-radius: 3px;
+	background: rgba(255, 255, 255, 0.2);
+	box-shadow: inherit;
+	border-bottom: none;
+	border-radius: 3px;
 }
 
 #workspaces button.focused {
-    background-color: #ebdbb2;
-    color: #282828;
-    border-bottom: none;
-    border-radius: 3px;
+	background-color: #b4f9f8;
+	color: #282828;
+	border-bottom: none;
+	border-radius: 3px;
 }
 
 #workspaces button.urgent {
-    background-color: #2c303c;
+	background-color: #f7768e;
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+	background-color: #f7768e;
+	border-bottom: 3px solid #f7768e;
 }
 
 #clock,
@@ -88,99 +79,47 @@ window#waybar.solo {
 #mode,
 #idle_inhibitor,
 #mpd {
-    padding: 0 14px;
-    margin: 4px 7px;
-    color: #ffffff;
-    border-radius: 3px;
+	padding: 0 9px;
+	margin: 4px 0px;
+	background-color: #24283b;
+	color: #cfc9c2;
 }
 
 #clock {
-    color: #000000;
-    background-color: #ebdbb2;
+	border-radius: 3px;
 }
 
-
 label:focus {
-    background-color: #000000;
+	background-color: #000000;
 }
 
 #cpu {
-    background-color: #ebdbb2;
-    color: #000000;
-    margin-right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-#memory {
-    background-color: #ebdbb2;
-    color: #000000;
-}
-
-#backlight {
-    background-color: #ebdbb2;
-    color: #000000;
-    margin-right: 7px;
+	color: #f7768e
 }
 
 #network {
-    background-color: #ebdbb2;
-    color: #000000;
-}
-
-#network.disconnected {
-    background-color: #ebdbb2;
+	border-radius: 3px 0 0 3px;
+	color: #9ece6a;
 }
 
 #pulseaudio {
-    background-color: #ebdbb2;
-    color: #000000;
-    border-radius: 5px 0px 0px 5px;
+	color: #e0af68;
 }
 
 #pulseaudio.muted {
-    background-color: #ebdbb2;
-    color: #000000;
 }
 
 #custom-media {
-    background-color: #ebdbb2;
-    color: #282828;
-    min-width: 100px;
+	min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
+	background-color: rgba(0, 0, 0, 0);
+	margin-right: 5px;
 }
 
 #temperature {
-    background-color: #ebdbb2;
-    color: #282828;
-    margin-left: 0;
-    border-radius: 0 3px 3px 0;
-
+	border-radius: 0 3px 3px 0;
+	margin-right: 5px;
+	color: #f7768e
 }
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #ebdbb2;
-}
-
-#idle_inhibitor {
-    background-color: rgba(0, 0, 0, 0);
-    color: #ebdbb2;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ebdbb2;
-    color: #282828;
-    border-radius: 5px;
-    margin-right: 2px;
-}
-

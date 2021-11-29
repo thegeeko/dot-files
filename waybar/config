@@ -1,82 +1,96 @@
 {
-    "layer": "top",
-    "height": 25,
-    "modules-left": ["custom/geny", "sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["cpu","temperature", "idle_inhibitor", "network" ],
+	"layer": "top",
+	"position": "bottom",
+	"height": 25,
+	"modules-left": ["custom/geny", "sway/workspaces", "sway/mode", "sway/window"],
+	"modules-center": ["clock"],
+	"modules-right": ["custom/media", "network", "pulseaudio", "cpu", "temperature"],
 
-    "custom/geny" : {
-       "format": "Geny"
-    },
+	"custom/geny" : {
+	 "format": "Geny"
+	},
 
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-            "1": " 1  ",
-            "2": " 2  ",
-            "3": " 3 ",
-            "4": " 4 ",
-            "5": " 5 ",
-            "6": " 6 ",
-            "7": " 7 ",
-            "8": " 8  ",
-            "9": " 9  ",
-            "10": " 10 "
-        }
-    },
+	"sway/workspaces": {
+		"disable-scroll": false,
+		"all-outputs": true,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "  ",
+			"2": "  ",
+			"3": "  ",
+			"4": " 4 ",
+			"5": " 5 ",
+			"6": " 6 ",
+			"7": " 7 ",
+			"8": "  ",
+			"9": "  ",
+			"urgent": "",
+			"focused": "",
+			"default": ""
+		},
+		"persistent_workspaces": {
+			"1": [],
+			"2": [],
+			"3": [],
+			"8": [],
+			"9": []
+		}
+	},
 
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
+	"sway/mode": {},
 
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
+	"clock": {
+		"tooltip-format": "<big>{:%i %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format-alt": "{:%Y-%m-%d}"
+	},
 
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 0
-    },
+	
+	"network": {
+		"interval": 1,
+		"format": "{bandwidthDownBits} ⇵ {bandwidthUpBits}",
+		"format-alt": "{essid} : {signalStrength} ",
+		"format-disconnected": "Disconnected ⚠"
+	},
 
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
+	"temperature": {
+		"interval": 1,
+		"thermal-zone": 1,
+		"hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+		"critical-threshold": 80,
+		"format-critical": "{temperatureC}°C ",
+		"format": "{temperatureC}°C "
+	},
 
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
- 	    //"format-icons": ["🌑","🌒","🌓","🌔","🌕"]
-        "format-icons": ["", ""]
-    },
+	"cpu": {
+		"interval": 1,
+		"format": "{usage}% ",
+		"max-length": 10
+	},
 
-    "network": {
-        "interval": 1,
-    	"format": "{bandwidthDownBits} ⇵ {bandwidthUpBits}",
-        "format-alt": "{essid} : {signalStrength} ",
-        "format-disconnected": "Disconnected ⚠",
-        "onclick": "exec alacritty -e nmtui"
-    },
-
-    "temperature": {
-        "interval": 1,
-        "thermal-zone": 1,
-  	    "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-  	    "critical-threshold": 80,
-  	    "format-critical": "{temperatureC}°C ",
-  	    "format": "{temperatureC}°C "
-    },
-
-    "cpu": {
-        "interval": 1,
-        "format": "{usage}% ",
-        "max-length": 10
-    }
-
+	"pulseaudio": {
+		"format": "{volume}% {icon}",
+		"format-bluetooth": "{volume}% {icon}",
+		"format-muted": "",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", ""]
+		},
+			"scroll-step": 1,
+			"on-click": "pavucontrol"
+	},
+	"custom/media": {
+		"format": "{icon} {}",
+		"return-type": "json",
+		"max-length": 40,
+		"format-icons": {
+			"spotify": ""
+		},
+		"escape": true,
+		"exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null"
+	}
 }

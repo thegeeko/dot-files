@@ -8,6 +8,7 @@ end
 
 return require('packer').startup({function()
 	-- themes
+	use 'folke/tokyonight.nvim'
 	use 'eddyekofo94/gruvbox-flat.nvim'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'hoob3rt/lualine.nvim'
