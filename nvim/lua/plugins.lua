@@ -40,6 +40,7 @@ return require('packer').startup({function()
 
 	-- editor tools
 	use 'lukas-reineke/indent-blankline.nvim'
+	use 'andweeb/presence.nvim'
 	use 'terrortylor/nvim-comment'
 	use {
 		'lewis6991/gitsigns.nvim',
