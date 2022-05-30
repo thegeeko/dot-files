@@ -12,16 +12,17 @@ set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
 set fish_greeting # Supresses fish's intro message
 set TERM xterm-256color # Sets the terminal type
 set EDITOR nvim # $EDITOR use vim in terminal
-set VISUAL code # $VISUAL use vscode in GUI mode
+set VISUAL codium # $VISUAL use vscode in GUI mode
 set PATH $HOME/.cargo/bin $PATH #rust path
 set ْXDG_CONFIG_HOME  $HOME/.config 
-set MANGOHUD 1 
+set -gx MANGOHUD 1 
 set _JAVA_AWT_WM_NONREPARENTING 1
-set XDG_CURRENT_DESKTOP sway
+# set XDG_CURRENT_DESKTOP sway
 set XDG_SESSION_TYPE wayland
 set QT_QPA_PLATFORM wayland
 set QT_QPA_PLATFORMTHEME qt5ct
 set GLIBC_TUNABLES glibc.rtld.dynamic_sort=2
+set -gx VULKAN_SDK /opt/vulkan_sdk/1.3.204.1/x86_64
 ### SET MANPAGER
 ### Uncomment only one of these!
 
@@ -276,7 +277,7 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 # vim and emacs
-alias vim='nvim'
+alias vim=nvim
 alias em='/usr/bin/emacs -nw'
 alias emacs="emacsclient -c -a 'emacs'"
 alias doomsync="~/.emacs.d/bin/doom sync"
@@ -306,7 +307,7 @@ alias unlock='sudo rm /var/lib/pacman/db.lck' # remove pacman lock
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # remove orphaned packages
 
 # Colorize grep output (good for log files)
-alias grep='grep --color=auto'
+alias grep='rg --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 

@@ -12,9 +12,18 @@ return require('packer').startup({function()
 	use 'eddyekofo94/gruvbox-flat.nvim'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'hoob3rt/lualine.nvim'
+	use 'xiyaowong/nvim-transparent'
 
 	-- language support
 	use 'cdelledonne/vim-cmake'
+	use {
+		'SmiteshP/nvim-gps',
+		requires = 'nvim-treesitter/nvim-treesitter'
+	}
+	use	'lervag/vimtex' 
+	use {
+	  'ray-x/lsp_signature.nvim',
+	}
 	use{
 		'hrsh7th/nvim-cmp',
 		requires={
@@ -29,16 +38,13 @@ return require('packer').startup({function()
 			 'neovim/nvim-lspconfig',
 		}
 	}
-	use{
-		'glepnir/lspsaga.nvim',
-		requires = {'neovim/nvim-lspconfig'}
-	}
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate'
 	}
 
 	-- editor tools
+	use 'numToStr/FTerm.nvim'
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'andweeb/presence.nvim'
 	use 'terrortylor/nvim-comment'
@@ -57,11 +63,8 @@ return require('packer').startup({function()
 		'kyazdani42/nvim-tree.lua',
 		requires = {'kyazdani42/nvim-web-devicons'},
 	}
-	use {
-		'goolord/alpha-nvim',
-		requires = {'kyazdani42/nvim-web-devicons'},
-	}
 end,
+
 config = {
 	display = {
 		open_fn = require('packer.util').float,

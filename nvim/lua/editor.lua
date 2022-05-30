@@ -9,8 +9,12 @@
 	vnoremap({'<C-p>', '"+p'})
 	vnoremap({'<C-P>', '"+P'})
 
+	-- reload the config file
 	nnoremap({'<F5><F5>', ':source ~/.config/nvim/init.lua<cr>'})
+	-- convert snakecase to camelcase
 	nnoremap({'<F11><F11>', ':s#_\\(\\l\\)#\\u\\1#g<cr>'})
+	-- change the working dir to the current file folder
+	nnoremap({'<Space>cd', ':cd %:p:h<cr>:pwd<cr>'})
 
 -- allow split
 vim.cmd[[
@@ -20,54 +24,37 @@ vim.cmd[[
 	set formatoptions+=j
 	set nostartofline
 ]]
+
 -- colorscheme
+
+-- if u want tokyonight just comment gruvbox and uncomment this
 -- vim.g.tokyonight_style = "night"
 -- vim.g.tokyonight_italic_functions = true
 -- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
--- vim.cmd[[colorscheme gruvbox-flat]]
+-- vim.cmd[[colorscheme tokyonight]]
 
 vim.g.gruvbox_flat_style = "hard"
 vim.g.gruvbox_italic_functions = true
 vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-
+vim.g.vim_tex_method = "mupdf"
 vim.cmd[[ colorscheme gruvbox-flat ]]
 
------- splash screen
-local alpha = require("alpha")
-local dashboard = require("alpha.themes.dashboard")
+-- trancprancy
+require("transparent").setup({
+  enable = true, -- boolean: enable transparent
+  extra_groups = { -- table/string: additional groups that should be cleared
+    -- In particular, when you set it to 'all', that means all available groups
 
--- Set header
-dashboard.section.header.val = {
-		"																										 ",
-		"	███╗	 ██╗███████╗ ██████╗ ██╗	 ██╗██╗███╗	 ███╗ ",
-		"	████╗	██║██╔════╝██╔═══██╗██║	 ██║██║████╗ ████║ ",
-		"	██╔██╗ ██║█████╗	██║	 ██║██║	 ██║██║██╔████╔██║ ",
-		"	██║╚██╗██║██╔══╝	██║	 ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-		"	██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-		"	╚═╝	╚═══╝╚══════╝ ╚═════╝	 ╚═══╝	╚═╝╚═╝		 ╚═╝ ",
-		"																										 ",
-}
-
--- Set menu
-dashboard.section.buttons.val = {
-		dashboard.button( "e", "	> New file" , ":ene <BAR> startinsert <CR>"),
-		dashboard.button( "f", "	> Find file", ":cd $HOME/projects | Telescope find_files<CR>"),
-		dashboard.button( "r", "	> Recent"	 , ":Telescope oldfiles<CR>"),
-		dashboard.button( "s", "	> Congig" , ":e $HOME/.config/nvim/init.lua"),
-		dashboard.button( "q", "	> Quit NVIM", ":qa<CR>"),
-}
-
--- Set footer
-local fortune = require("alpha.fortune")
-dashboard.section.footer.val = fortune()
-
--- Send config to alpha
-alpha.setup(dashboard.opts)
-
--- Disable folding on alpha buffer
-vim.cmd([[
-		autocmd FileType alpha setlocal nofoldenable
-]])
+    -- example of akinsho/nvim-bufferline.lua
+    "BufferLineTabClose",
+    "BufferlineBufferSelected",
+    "BufferLineFill",
+    "BufferLineBackground",
+    "BufferLineSeparator",
+    "BufferLineIndicatorSelected",
+  },
+  exclude = {}, -- table: groups you don't want to clear
+})
 
 ------ comments
 require('nvim_comment').setup({
@@ -88,7 +75,6 @@ require('nvim_comment').setup({
 ------ indentation and lines nu
 vim.opt.list = true
 vim.cmd[[ 
-	set listchars=tab:-\ ,trail:·,precedes:«,extends:»,eol:¬,space:., 
 	set softtabstop=2
 	set tabstop=2
 	set shiftwidth=2
@@ -99,7 +85,7 @@ vim.cmd[[
 
 ]]
 
-	nnoremap({'<F12><F12>', ' :%s/	/	/g<cr>'})
+nnoremap({'<F12><F12>', ' :%s/	/	/g<cr>'})
 
 require("indent_blankline").setup {
 	show_end_of_line = true,
@@ -113,15 +99,25 @@ require('telescope').load_extension('fzy_native')
 nnoremap({'<Space>f', '<cmd>lua require("telescope.builtin").find_files()<cr>'})
 nnoremap ({'<Space>g', '<cmd>lua require("telescope.builtin").live_grep()<cr>'})
 nnoremap ({'<Space><Space>', '<cmd>lua require("telescope.builtin").buffers()<cr>'})
-nnoremap ({'<Space>h <cmd>lua', 'require("telescope.builtin").commands()<cr>'})
-nnoremap ({'<Space>h <cmd>lua', 'require("telescope.builtin").help_tags()<cr>'})
-nnoremap ({'<Space>m <cmd>lua', 'require("telescope.builtin").man_pages()<cr>'})
-nnoremap ({'<Space>= <cmd>lua', 'require("telescope.builtin").git_bcommits()<cr>'})
-nnoremap ({'<Space>+ <cmd>lua', 'require("telescope.builtin").git_commits()<cr>'})
+nnoremap ({'<Space>h', '<cmd>lua require("telescope.builtin").commands()<cr>'})
+nnoremap ({'<Space>m', '<cmd>lua require("telescope.builtin").man_pages()<cr>'})
+nnoremap ({'<Space>=', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>'})
+nnoremap ({'<Space>+', '<cmd>lua require("telescope.builtin").git_commits()<cr>'})
+
 -- cmake
 nnoremap({'cg', '<cmd>CMakeGenerate<cr>'})
 nnoremap({'cb', '<cmd>CMakeBuild<cr>'})
 nnoremap({'cc', '<cmd>CMakeClean<cr>'})
+
+-- float rerm
+require'FTerm'.setup({
+    border = 'double',
+    dimensions  = {
+        height = 0.9,
+        width = 0.9,
+    },
+})
+nnoremap({'TT' ,'<cmd>lua require("FTerm").toggle()<cr>'})
 
 ------ git signs
 require('gitsigns').setup {
@@ -199,8 +195,6 @@ require('nvim-tree').setup {
 	open_on_setup			 = false,
 	-- will not open on setup if the filetype is in this list
 	ignore_ft_on_setup	= {},
-	-- closes neovim automatically when the tree is the last **WINDOW** in the view
-	auto_close					= false,
 	-- opens the tree when changing/opening a new tab if the tree wasn't previously opened
 	open_on_tab				 = false,
 	-- hijacks new directory buffers when they are opened.
@@ -213,9 +207,7 @@ require('nvim-tree').setup {
 	-- hijack the cursor in the tree to put it at the start of the filename
 	hijack_cursor			 = false,
 	-- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-	update_cwd					= false,
-	-- show lsp diagnostics in the signcolumn
-	lsp_diagnostics		 = false,
+	update_cwd					= true,
 	-- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
 	update_focused_file = {
 		-- enables the feature
@@ -243,7 +235,7 @@ require('nvim-tree').setup {
 		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
 		side = 'left',
 		-- if true the tree will resize itself after opening a file
-		auto_resize = false,
+		auto_resize = true,
 		mappings = {
 			-- custom only false will merge the list with the default mappings
 			-- if true, it will only use your list to set the mappings
@@ -290,12 +282,35 @@ require("presence"):setup({
 })
 
 ------ bar
+require("nvim-gps").setup()
+local gps = require("nvim-gps")
+
 require('lualine').setup {
-	options = {
-		icons_enabled = true,
-		theme = 'tokyonight',
-		component_separators = {'/', '/'},
-		section_separators = {' ', ' '},
-		disabled_filetypes = {}
-	}
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+    globalstatus = false,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename', gps.get_location},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
 }
