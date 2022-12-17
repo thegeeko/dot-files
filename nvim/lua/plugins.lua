@@ -10,12 +10,15 @@ return require('packer').startup({function()
 	-- themes
 	use 'folke/tokyonight.nvim'
 	use 'eddyekofo94/gruvbox-flat.nvim'
+  use 'Mofiqul/dracula.nvim'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'hoob3rt/lualine.nvim'
 	use 'xiyaowong/nvim-transparent'
 
 	-- language support
+  use 'github/copilot.vim'
 	use 'cdelledonne/vim-cmake'
+  use 'jose-elias-alvarez/null-ls.nvim'
 	use {
 		'SmiteshP/nvim-gps',
 		requires = 'nvim-treesitter/nvim-treesitter'
@@ -48,6 +51,8 @@ return require('packer').startup({function()
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'andweeb/presence.nvim'
 	use 'terrortylor/nvim-comment'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'windwp/nvim-autopairs'
 	use {
 		'lewis6991/gitsigns.nvim',
 		requires = {'nvim-lua/plenary.nvim'}

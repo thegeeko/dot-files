@@ -33,28 +33,51 @@ vim.cmd[[
 -- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 -- vim.cmd[[colorscheme tokyonight]]
 
-vim.g.gruvbox_flat_style = "hard"
-vim.g.gruvbox_italic_functions = true
-vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-vim.g.vim_tex_method = "mupdf"
-vim.cmd[[ colorscheme gruvbox-flat ]]
+-- vim.g.gruvbox_flat_style = "hard"
+-- vim.g.gruvbox_italic_functions = true
+-- vim.g.gruvbox_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+-- vim.g.vim_tex_method = "mupdf"
+-- vim.cmd[[ colorscheme gruvbox-flat ]]
+
+local dracula = require("dracula")
+dracula.setup({
+  -- show the '~' characters after the end of buffers
+  show_end_of_buffer = false, -- default false
+  -- use transparent background
+  transparent_bg = false, -- default false
+  -- set custom lualine background color
+  lualine_bg_color = nil, -- default nil
+  -- set italic comment
+  italic_comment = true, -- default false
+  -- overrides the default highlights see `:h synIDattr`
+  overrides = {
+    -- Examples
+    -- NonText = { fg = dracula.colors().white }, -- set NonText fg to white
+      ['@keyword'] = { fg = dracula.colors().pink, italic = true, bold = true },
+      ['@type'] = { fg = dracula.colors().bright_cyan, italic = true, bold = true},
+
+    -- NvimTreeIndentMarker = { link = "NonText" }, -- link to NonText highlight
+    -- Nothing = {} -- clear highlight of Nothing
+  },
+})
+vim.cmd[[ colorscheme dracula]]
 
 -- trancprancy
-require("transparent").setup({
-  enable = true, -- boolean: enable transparent
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-
-    -- example of akinsho/nvim-bufferline.lua
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude = {}, -- table: groups you don't want to clear
-})
+-- require("transparent").setup({
+--   enable = true, -- boolean: enable transparent
+--   extra_groups = { -- table/string: additional groups that should be cleared
+--     -- In particular, when you set it to 'all', that means all available groups
+--
+--     -- example of akinsho/nvim-bufferline.lua
+--     "BufferLineTabClose",
+--     "BufferlineBufferSelected",
+--     "BufferLineFill",
+--     "BufferLineBackground",
+--     "BufferLineSeparator",
+--     "BufferLineIndicatorSelected",
+--   },
+--   exclude = {}, -- table: groups you don't want to clear
+-- })
 
 ------ comments
 require('nvim_comment').setup({
@@ -69,8 +92,35 @@ require('nvim_comment').setup({
 		-- Visual/Operator mapping left hand side
 		operator_mapping = "\\",
 		-- Hook function to call before commenting takes place
-		hook = nil
+		hook = function()
+      require("ts_context_commentstring.internal").update_commentstring()
+    end
 })
+
+------ auto pairs
+require("nvim-autopairs").setup {
+  check_ts = true,
+  ts_config = {
+    lua = { "string", "source" },
+    javascript = { "string", "template_string" },
+    java = false,
+  },
+  disable_filetype = { "TelescopePrompt", "spectre_panel" },
+  fast_wrap = {
+    map = "<M-e>",
+    chars = {"<", "{", "[", "(", '"', "'" },
+    pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+    offset = 0, -- Offset from pattern match
+    end_key = "$",
+    keys = "qwertyuiopzxcvbnmasdfghjkl",
+    check_comma = true,
+    highlight = "PmenuSel",
+    highlight_grey = "LineNr",
+  },
+}
+
+local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
 ------ indentation and lines nu
 vim.opt.list = true
@@ -88,8 +138,8 @@ vim.cmd[[
 nnoremap({'<F12><F12>', ' :%s/	/	/g<cr>'})
 
 require("indent_blankline").setup {
-	show_end_of_line = true,
-	char = ".",
+	show_end_of_line = false,
+	char = nil,
 	buftype_exclude = {"terminal"},
 }
 
@@ -118,6 +168,8 @@ require'FTerm'.setup({
     },
 })
 nnoremap({'TT' ,'<cmd>lua require("FTerm").toggle()<cr>'})
+vim.keymap.set('t', 'TT', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+
 
 ------ git signs
 require('gitsigns').setup {
@@ -217,7 +269,7 @@ require('nvim-tree').setup {
 		update_cwd	= false,
 		-- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
 		-- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
-		ignore_list = {}
+		ignore_list = {"node_modules", "zig-out", "zig-cache"}
 	},
 	-- configuration options for the system open command (`s` in the tree by default)
 	system_open = {
@@ -226,6 +278,12 @@ require('nvim-tree').setup {
 		-- the command arguments as a list
 		args = {}
 	},
+
+  git = {
+    enable = true,
+    ignore = false,
+    timeout = 500,
+  },
 
 	view = {
 		-- width of the window, can be either a number (columns) or a string in `%`, for left or right side placement
@@ -255,7 +313,7 @@ nnoremap({'tr', ':NvimTreeRefresh<CR>'})
 
 vim.cmd [[
 	set termguicolors	
-	highlight NvimTreeFolderIcon guibg=blue
+	" highlight NvimTreeFolderIcon guibg=blue
 ]]
 
 ---- discord
